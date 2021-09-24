@@ -1,15 +1,24 @@
 // Declarative //
 pipeline {
   agent any
+  environment { ①
+  CC = 'clang'
+  }
   stages {
   stage('Example') {
+  environment { ②
+  DEBUG_FLAGS = '-g'
+  }
   steps {
-  echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+  sh 'printenv'
   }
   }
   }
 }
 // Script //
 node {
-  echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+  /* .. snip .. */
+  withEnv(["PATH+MAVEN=${tool 'M3'}/bin"]) {
+  sh 'mvn -B verify'
+  }
 }
