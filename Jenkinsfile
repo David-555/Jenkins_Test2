@@ -1,12 +1,12 @@
 // Declarative //
 pipeline {
   agent any
-  environment { ①
+  environment { 
   CC = 'clang'
   }
   stages {
   stage('Example') {
-  environment { ②
+  environment { 
   DEBUG_FLAGS = '-g'
   }
   steps {
